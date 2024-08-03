@@ -5,9 +5,9 @@
 @layer base {
   html,
   body {
-    /* font-family: 'azo_sansregular', Helvetica, Arial, sans-serif; */
+	  font-family: "Roboto", sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    @apply text-slate-700;
+    @apply text-slate-800;
   }
 }
