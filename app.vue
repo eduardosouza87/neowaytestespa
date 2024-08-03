@@ -3,7 +3,7 @@
     <div class="min-h-screen w-full py-10">
       <div class="container mx-auto">
         <div class="flex flex-col gap-y-8">
-          <h1 class="text-4xl">Últimas Notícias</h1>
+          <h1 class="text-4xl text-app-blue-400">Últimas Notícias</h1>
           <div v-if="error">{{ error.message }}</div>
           <div v-else-if="isLoading">Carregando...</div>
           <div
@@ -15,8 +15,8 @@
               :key="article.url"
               class="flex flex-col gap-y-1"
             >
-              <h2 class="text-xl">{{ article.title }}</h2>
-              <p>{{ article.description }}</p>
+              <h2 class="text-xl text-app-orange-400">{{ article.title }}</h2>
+              <p class="">{{ article.description }}</p>
             </div>
           </div>
         </div>
