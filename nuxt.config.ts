@@ -11,4 +11,10 @@ export default defineNuxtConfig({
       apiKey: process.env.API_KEY,
     }
   },
+
+  modules: ["@nuxt/ui"],
+
+  tailwindcss: {
+    cssPath: '~/assets/tailwind.css'
+  },
 })
