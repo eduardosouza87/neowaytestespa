@@ -4,45 +4,105 @@
       <div class="container mx-auto">
         <div class="flex items-start gap-x-10">
           <div class="flex flex-col gap-y-8 w-2/3 bg-white rounded-md shadow p-8">
+
+            <div
+              class="flex flex-col lg:flex-row lg:justify-between items-center pb-4 border-b border-b-app-blue-400/20"
+            >
+              <h1 class="text-4xl text-app-blue-400">Últimas Notícias</h1>
+              <UInput
+                icon="i-heroicons-magnifying-glass-20-solid"
+                size="lg"
+                color="white"
+                :trailing="false"
+                placeholder="Buscar notícias..."
+                v-model="searchKeyword"
+                @focus="startTracking"
+                @input="resetTimer"
+                @blur="clearTimer"
+              />
+            </div>
+
             <div v-if="error">{{ error.message }}</div>
 
-            <div v-else-if="isLoading">
-              <div class="flex items-center space-x-4">
-                <div class="flex justify-between items-center w-full">
-                  <USkeleton class="h-8 w-[250px]" />
-                  <USkeleton class="h-8 w-[200px]" />
+            <div
+              v-else-if="isLoading"
+              class="flex flex-col gap-y-8"
+            >
+              <div class="flex flex-col gap-y-4">
+                <div class="flex flex-row justify-between items-center lg:gap-x-10">
+                  <div class="flex flex-col gap-y-2 w-2/3">
+                    <USkeleton class="h-4 w-40" />
+                    <USkeleton class="h-8 w-2/3" />
+                    <USkeleton class="h-8 w-full" />
+                    <USkeleton class="h-8 w-64" />
+                  </div>
+
+                  <USkeleton class="h-64 w-80 rounded-md" />
                 </div>
               </div>
-              <span>Carregando...</span>
+
+              <div class="flex flex-col gap-y-4">
+                <div class="flex flex-row justify-between items-center lg:gap-x-10">
+                  <div class="flex flex-col gap-y-2 w-2/3">
+                    <USkeleton class="h-4 w-40" />
+                    <USkeleton class="h-8 w-64" />
+                    <USkeleton class="h-8 w-64" />
+                    <USkeleton class="h-8 w-64" />
+                  </div>
+
+                  <USkeleton class="h-64 w-80 rounded-md" />
+                </div>
+              </div>
+
+              <div class="flex flex-col gap-y-4">
+                <div class="flex flex-row justify-between items-center lg:gap-x-10">
+                  <div class="flex flex-col gap-y-2 w-2/3">
+                    <USkeleton class="h-4 w-40" />
+                    <USkeleton class="h-8 w-64" />
+                    <USkeleton class="h-8 w-64" />
+                    <USkeleton class="h-8 w-64" />
+                  </div>
+
+                  <USkeleton class="h-64 w-80 rounded-md" />
+                </div>
+              </div>
+
+              <div class="flex flex-col gap-y-4">
+                <div class="flex flex-row justify-between items-center lg:gap-x-10">
+                  <div class="flex flex-col gap-y-2 w-2/3">
+                    <USkeleton class="h-4 w-40" />
+                    <USkeleton class="h-8 w-64" />
+                    <USkeleton class="h-8 w-64" />
+                    <USkeleton class="h-8 w-64" />
+                  </div>
+
+                  <USkeleton class="h-64 w-80 rounded-md" />
+                </div>
+              </div>
+
+              <div class="flex flex-col gap-y-4">
+                <div class="flex flex-row justify-between items-center lg:gap-x-10">
+                  <div class="flex flex-col gap-y-2 w-2/3">
+                    <USkeleton class="h-4 w-40" />
+                    <USkeleton class="h-8 w-64" />
+                    <USkeleton class="h-8 w-64" />
+                    <USkeleton class="h-8 w-64" />
+                  </div>
+
+                  <USkeleton class="h-64 w-80 rounded-md" />
+                </div>
+              </div>
             </div>
 
             <div
               v-else
-              class="flex flex-col gap-y-"
+              class="flex flex-col"
             >
-              <div
-                class="flex flex-col lg:flex-row lg:justify-between items-center pb-4 mb-4 border-b border-b-app-blue-400/20"
-              >
-                <h1 class="text-4xl text-app-blue-400">Últimas Notícias</h1>
-                <UInput
-                  class="max-lg:order-2"
-                  icon="i-heroicons-magnifying-glass-20-solid"
-                  size="lg"
-                  color="white"
-                  :trailing="false"
-                  placeholder="Buscar notícias..."
-                  v-model="searchKeyword"
-                  @focus="startTracking"
-                  @input="resetTimer"
-                  @blur="clearTimer"
-                />
-              </div>
-
               <div class="flex flex-col">
                 <div
                   v-for="article in filteredNews"
                   :key="article.url"
-                  class="flex flex-row justify-between items-center lg:gap-x-10 border-t border-t-app-blue-100 first:border-t-0 pt-6 mt-6"
+                  class="flex flex-row justify-between items-center lg:gap-x-10 border-t border-t-app-blue-100/10 first:border-t-0 py-8 first:pt-0"
                 >
                   <div class="flex flex-col gap-y-2 w-2/3">
                     <span class="uppercase text-sm text-app-blue-400">{{ article.source.name }}</span>
@@ -69,7 +129,7 @@
                   <NuxtImg
                     v-if="article.urlToImage"
                     :src="article.urlToImage"
-                    class="w-80 h-64 object-cover rounded"
+                    class="w-80 h-64 object-cover rounded-md"
                   />
                 </div>
               </div>
