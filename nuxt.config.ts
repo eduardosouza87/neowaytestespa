@@ -23,7 +23,7 @@ export default defineNuxtConfig({
     }
   },
 
-  modules: ["@nuxt/ui", "@nuxt/image"],
+  modules: ["@nuxt/ui", "@nuxt/image", "@pinia/nuxt"],
 
   tailwindcss: {
     cssPath: '~/assets/tailwind.css'
