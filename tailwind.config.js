@@ -11,21 +11,7 @@ module.exports = {
   theme: {
     extend: {
       colors: {        
-        app: {
-            'jacksons-purple': {
-          '50': '#eaf1ff',
-          '100': '#d9e4ff',
-          '200': '#baccff',
-          '300': '#91abff',
-          '400': '#657bff',
-          '500': '#424dff',
-          '600': '#2621ff',
-          '700': '#1e16ec',
-          '800': '#1a15be',
-          '900': '#1b1b96',
-          '950': '#111056',
-      },
-    
+        app: {   
 					blue: {
 						100: '#8bb1ea',
 						400: '#1b1b96',

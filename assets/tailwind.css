@@ -8,6 +8,6 @@
 	  font-family: "Roboto", sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    @apply text-slate-800 bg-slate-50;
+    @apply text-slate-800 bg-slate-100;
   }
 }

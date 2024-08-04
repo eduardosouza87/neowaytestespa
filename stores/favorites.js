@@ -1,4 +1,4 @@
-import { defineStore } from 'pinia';
+import { defineStore } from 'pinia'
 
 export const useFavoritesStore = defineStore('favorites', {
   state: () => ({
@@ -7,19 +7,22 @@ export const useFavoritesStore = defineStore('favorites', {
   actions: {
     addFavorite(article) {
       if (!this.favorites.find(fav => fav.url === article.url)) {
-        this.favorites.push({ title: article.title, url: article.url });
+        this.favorites.push(article)
       }
     },
     removeFavorite(articleUrl) {
-      this.favorites = this.favorites.filter(fav => fav.url !== articleUrl);
+      this.favorites = this.favorites.filter(fav => fav.url !== articleUrl)
     },
     clearFavorites() {
-      this.favorites = [];
+      this.favorites = []
     },
+    getFavorite(articleUrl) {
+      return this.favorites.find(fav => fav.url === articleUrl) || null
+    }
   },
   getters: {
     isFavorite: (state) => (articleUrl) => {
-      return state.favorites.some(fav => fav.url === articleUrl);
+      return state.favorites.some(fav => fav.url === articleUrl)
     }
   }
 })
