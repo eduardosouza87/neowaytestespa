@@ -1,28 +1,43 @@
-<script lang="ts" setup>
-defineProps({
-  count: {
-    type: Number,
-    default: 0
-  }
-})
-
-const emit = defineEmits(['success'])
-
-function onSuccess() {
-  emit('success')
-}
-</script>
-
 <template>
   <UModal>
     <UCard>
-      <div class="space-y-2">
-        <p>This modal was opened programmatically !</p>
-        <p>Count: {{ count }}</p>
-        <UButton @click="onSuccess">
-          Click to emit a success event
-        </UButton>
+      <UButton
+        color="primary"
+        variant="ghost"
+        icon="i-heroicons-x-mark-20-solid"
+        class="-my-1 absolute right-4 top-4 rounded-full"
+        @click="closeModal"
+      />
+
+      <div class="flex flex-col gap-y-4">
+        <div class="modal-heading flex flex-col gap-y-4 pr-4">
+          <h1 class="text-app-orange-400 font-bold text-2xl">{{ article.title }}</h1>
+          <span class="text-lg italic text-app-blue-400">{{ article.description }}</span>
+          <span class="text-sm italic">Por: {{ article.author }}</span>
+        </div>
+
+
+        <NuxtImg
+          v-if="article.urlToImage"
+          :src="article.urlToImage"
+          class="w-full h-64 object-cover rounded"
+        />
+
+        <div>
+          {{ article.content }}
+        </div>
       </div>
     </UCard>
   </UModal>
 </template>
+
+<script lang="ts" setup>
+defineProps({
+  article: {
+    type: Object,
+    required: true
+  }
+})
+
+const { closeModal } = useArticleModal()
+</script>

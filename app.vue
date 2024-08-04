@@ -1,11 +1,5 @@
 <template>
   <div>
-    <UButton
-      label="Reveal modal"
-      @click="openModal"
-    />
-
-
     <div class="min-h-screen w-full py-10">
       <div class="container max-w-5xl mx-auto">
         <div class="flex flex-col gap-y-8">
@@ -41,13 +35,17 @@
               >
                 <div class="flex flex-col gap-y-2 w-2/3">
                   <span class="uppercase text-sm text-app-blue-400">{{ article.source.name }}</span>
-                  <h2 class="text-xl text-app-orange-400">{{ article.title }}</h2>
+                  <h1
+                    class="text-xl text-app-orange-400 cursor-pointer"
+                    @click="openArticleModal(article)"
+                  > {{ article.title }}
+                  </h1>
                   <p class="text-sm">{{ article.description }}</p>
                 </div>
 
                 <NuxtImg
                   v-if="article.urlToImage"
-                  :src="`${article.urlToImage}`"
+                  :src="article.urlToImage"
                   class="w-80 h-64 object-cover rounded"
                 />
               </div>
@@ -62,8 +60,6 @@
 </template>
 
 <script setup>
-import Modal from './components/Modal.vue';
-
 const runtimeConfig = useRuntimeConfig()
 
 const { data: news, pending: isLoading, error } = await useFetch(
@@ -105,21 +101,8 @@ const filteredNews = computed(() => {
 })
 
 
-const toast = useToast()
-const modal = useModal()
-const count = ref(0)
+const { openArticleModal } = useArticleModal()
 
-function openModal() {
-  count.value += 1
-  modal.open(Modal, {
-    count: count.value,
-    onSuccess() {
-      toast.add({
-        title: 'Success !',
-        id: 'modal-success'
-      })
-    }
-  })
-}
+
 // const { data: news, pending: isLoading, error } = await useFetch('/api/news')
 </script>
