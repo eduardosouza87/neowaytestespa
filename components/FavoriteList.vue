@@ -20,6 +20,11 @@
         @click="openFavoriteArticle(favorite)"
         class="favorites-list__item"
       >
+        <NuxtImg
+          v-if="favorite.urlToImage"
+          :src="favorite.urlToImage"
+          class="favorites-list__item-thumb"
+        />
         <span class="favorites-list__item-title">{{ favorite.title }}</span>
       </li>
     </ul>
@@ -52,10 +57,14 @@ const openFavoriteArticle = (article) => {
 }
 
 .favorites-list__item {
-  @apply cursor-pointer;
+  @apply cursor-pointer flex flex-row items-center gap-x-4 border-t border-t-app-blue-100/10 first:border-t-0 py-2 first:pt-0;
 }
 
 .favorites-list__item-title {
-  @apply text-app-orange-400 hover:underline;
+  @apply text-sm text-app-orange-400 hover:underline;
+}
+
+.favorites-list__item-thumb {
+  @apply h-12 w-12 object-cover rounded-md;
 }
 </style>

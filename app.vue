@@ -1,17 +1,17 @@
 <template>
-  <div class="relative">
-    <div class="min-h-screen w-full py-10 px-4">
-      <div class="container mx-auto">
-        <div class="flex items-start gap-x-10">
-          <div class="flex flex-col gap-y-8 lg:w-2/3 bg-white rounded-md shadow p-6 lg:p-8">
-            <div
-              class="flex flex-col max-lg:gap-y-4 lg:flex-row lg:justify-between items-center pb-4 border-b border-b-app-blue-400/20"
-            >
-              <h1 class="text-2xl lg:text-4xl text-app-blue-400">Últimas Notícias</h1>
+  <main class="__app">
+    <div class="app__wrapper">
+      <div class="app__container">
+        <div class="lg:flex lg:items-start lg:gap-x-10 w-full">
+          <section class="home-news">
+            <div class="home-news__header">
+              <h1 class="home-news__title">Últimas Notícias</h1>
               <SearchInput v-model="searchKeyword" />
             </div>
 
-            <div v-if="error">{{ error.message }}</div>
+            <div v-if="error">
+              <span>{{ error.message }}</span>
+            </div>
 
             <div
               v-else-if="isLoading"
@@ -24,31 +24,44 @@
               v-if="filteredNews"
               :news="filteredNews"
             />
-          </div>
+          </section>
 
-          <div class="sticky top-6 lg:w-1/3 bg-white rounded-md p-8 shadow">
+          <aside
+            class="favorites-news"
+            :class="isOpenSidebar ? 'max-lg:translate-x-0 max-lg:h-screen' : 'max-lg:translate-x-full'"
+          >
             <FavoriteList :favorites="favoritesStore.favorites" />
-          </div>
+          </aside>
         </div>
       </div>
     </div>
 
-    <!-- <div class="fixed right-6 bottom-6">
-      <div class="shadow p-4 flex flex-col items-center bg-white rounded-full">
+    <!-- Botão fixo para abrir a lista de favoritos -->
+    <div class="fixed right-6 bottom-8 z-50 lg:hidden">
+      <div
+        class="shadow p-3 flex flex-col items-center bg-app-blue-100/50 rounded-full cursor-pointer"
+        @click="handleSidebar()"
+      >
         <UIcon
-          name="material-symbols:star"
-          class="w-8 h-8 text-amber-600"
+          :name="isOpenSidebar ? 'material-symbols:close-rounded' : 'material-symbols:star'"
+          class="w-6 h-6 text-app-blue-400"
         />
       </div>
-    </div> -->
+    </div>
 
     <UModals />
     <UNotifications />
-  </div>
+  </main>
 </template>
 
 <script setup>
 import { useFavoritesStore } from '~/stores/favorites';
+
+useSeoMeta({
+  title: 'Case técnico - Pessoa Desenvolvedor Frontend',
+  description: 'Projeto desenvolvido para o teste de Eduardo de Souza',
+})
+
 const favoritesStore = useFavoritesStore()
 const runTimeConfig = useRuntimeConfig()
 
@@ -84,4 +97,39 @@ const filteredNews = computed(() => {
     article.title.toLowerCase().includes(searchKeyword.value.toLowerCase())
   )
 })
+
+const isOpenSidebar = ref(false)
+const handleSidebar = () => {
+  isOpenSidebar.value = !isOpenSidebar.value
+}
 </script>
+
+<style lang="postcss" scoped>
+.__app {
+  @apply relative max-lg:overflow-x-hidden;
+}
+
+.app__wrapper {
+  @apply min-h-screen w-full py-6 lg:py-10 px-4;
+}
+
+.app__container {
+  @apply container mx-auto;
+}
+
+.home-news {
+  @apply flex flex-col gap-y-8 lg:w-2/3 bg-white rounded-md shadow p-6 lg:p-8
+}
+
+.home-news__header {
+  @apply flex flex-col max-lg:gap-y-4 lg:flex-row lg:justify-between items-center pb-4 border-b border-b-app-blue-400/20;
+}
+
+.home-news__title {
+  @apply text-2xl lg:text-4xl text-app-blue-400;
+}
+
+.favorites-news {
+  @apply bg-white lg:w-1/3 rounded-md p-4 lg:p-8 shadow fixed lg:sticky max-lg:right-0 top-6 max-lg:z-10 transition-transform;
+}
+</style>

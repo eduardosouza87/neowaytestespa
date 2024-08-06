@@ -5,7 +5,7 @@
       :key="article.url"
       class="news-list__item"
     >
-      <div class="flex flex-col gap-y-2 lg:w-2/3">
+      <div class="news-list__content">
         <span class="news-list__source">{{ article.source.name }}</span>
         <h1
           class="news-list__title"
@@ -81,15 +81,19 @@ const getIcon = (articleUrl) => {
 }
 
 .news-list__item {
-  @apply flex flex-row justify-between items-center lg:gap-x-10 border-t border-t-app-blue-100/10 first:border-t-0 py-8 first:pt-0;
+  @apply flex flex-col lg:flex-row lg:justify-between lg:items-center max-lg:gap-y-4 lg:gap-x-10 border-t border-t-app-blue-100/10 first:border-t-0 py-4 lg:py-8 first:pt-0;
+}
+
+.news-list__content {
+  @apply flex flex-col gap-y-2 lg:w-2/3 max-lg:order-2;
 }
 
 .news-list__source {
-  @apply uppercase text-sm text-app-blue-400;
+  @apply uppercase text-xs lg:text-sm text-app-blue-400;
 }
 
 .news-list__title {
-  @apply text-xl text-app-orange-400 hover:text-app-orange-900 cursor-pointer transition-colors;
+  @apply text-lg lg:text-xl text-app-orange-400 hover:text-app-orange-900 cursor-pointer transition-colors;
 }
 
 .news-list__description {
@@ -97,6 +101,6 @@ const getIcon = (articleUrl) => {
 }
 
 .news-list__thumb {
-  @apply w-80 h-64 object-cover rounded-md max-lg:hidden;
+  @apply w-full h-32 max-lg:order-1 lg:w-80 lg:h-64 object-cover rounded-md;
 }
 </style>

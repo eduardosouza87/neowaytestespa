@@ -10,9 +10,9 @@
       />
 
       <div class="flex flex-col gap-y-4">
-        <div class="modal-heading flex flex-col gap-y-4 pr-4">
-          <h1 class="text-app-orange-400 font-bold text-2xl">{{ article.title }}</h1>
-          <span class="text-lg italic text-app-blue-400">{{ article.description }}</span>
+        <div class="modal-heading flex flex-col gap-y-2 lg:gap-y-4 pr-4">
+          <h1 class="text-app-orange-400 font-bold text-xl lg:text-2xl">{{ article.title }}</h1>
+          <span class="text-base lg:text-lg italic text-app-blue-400">{{ article.description }}</span>
           <span class="text-sm italic">Por: {{ article.author }}</span>
         </div>
 
