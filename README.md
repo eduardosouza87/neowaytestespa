@@ -48,25 +48,6 @@ As seguintes ferramentas foram utilizadas neste projeto:
 
 ```bash
 # Clone este projeto
-$ git clone https://github.com/eduardosouza87/neowaytestespa
-
-# Acesse
-$ cd neowaytestespa
-
-# Instale as dependencias
-# pnpm
-$ pnpm i
-
-# Rode o projeto
-$ pnpm dev
-
-# O servidor vai iniciar em <http://localhost:3000>
-```
-
-## :checkered_flag: Iniciando o Projeto ##
-
-```bash
-# Clone este projeto
 git clone https://github.com/eduardosouza87/neowaytestespa
 
 # Acesse
