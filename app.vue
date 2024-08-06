@@ -2,7 +2,7 @@
   <main class="__app">
     <div class="app__wrapper">
       <div class="app__container">
-        <div class="lg:flex lg:items-start lg:gap-x-10 w-full">
+        <div class="home-wrapper">
           <section class="home-news">
             <div class="home-news__header">
               <h1 class="home-news__title">Últimas Notícias</h1>
@@ -36,15 +36,14 @@
       </div>
     </div>
 
-    <!-- Botão fixo para abrir a lista de favoritos -->
-    <div class="fixed right-6 bottom-8 z-50 lg:hidden">
+    <div class="favorites-button">
       <div
-        class="shadow p-3 flex flex-col items-center bg-app-blue-100/50 rounded-full cursor-pointer"
+        class="favorites-button__icon-container"
         @click="handleSidebar()"
       >
         <UIcon
           :name="isOpenSidebar ? 'material-symbols:close-rounded' : 'material-symbols:star'"
-          class="w-6 h-6 text-app-blue-400"
+          class="favorites-button__icon"
         />
       </div>
     </div>
@@ -62,19 +61,23 @@ useSeoMeta({
   description: 'Projeto desenvolvido para o teste de Eduardo de Souza',
 })
 
-const favoritesStore = useFavoritesStore()
-const runTimeConfig = useRuntimeConfig()
+const news = ref(null)
+const isLoading = ref(true)
+const error = ref(null)
 
-const { data: news, pending: isLoading, error } = await useFetch(
-  `?q=technology`,
-  {
-    server: false,
-    baseURL: runTimeConfig.public.apiBaseUrl,
-    headers: {
-      authorization: `Bearer ${runTimeConfig.public.apiKey}`
-    }
+const favoritesStore = useFavoritesStore()
+
+onMounted(async () => {
+  try {
+    isLoading.value = true
+    const data = await $fetch('/api/news')
+    news.value = data
+  } catch (err) {
+    error.value = err
+  } finally {
+    isLoading.value = false
   }
-)
+})
 
 const searchKeyword = ref('')
 const newsList = ref([])
@@ -117,6 +120,10 @@ const handleSidebar = () => {
   @apply container mx-auto;
 }
 
+.home-wrapper {
+  @apply lg:flex lg:items-start lg:gap-x-10 w-full;
+}
+
 .home-news {
   @apply flex flex-col gap-y-8 lg:w-2/3 bg-white rounded-md shadow p-6 lg:p-8
 }
@@ -131,5 +138,17 @@ const handleSidebar = () => {
 
 .favorites-news {
   @apply bg-white lg:w-1/3 rounded-md p-4 lg:p-8 shadow fixed lg:sticky max-lg:right-0 top-6 max-lg:z-10 transition-transform;
+}
+
+.favorites-button {
+  @apply fixed right-6 bottom-8 z-50 lg:hidden;
+}
+
+.favorites-button__icon-container {
+  @apply w-6 h-6 text-app-blue-400;
+}
+
+.favorites-button__icon {
+  @apply shadow p-3 flex flex-col items-center bg-app-blue-100/50 rounded-full cursor-pointer;
 }
 </style>

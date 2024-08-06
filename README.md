@@ -39,9 +39,9 @@ Projeto que lista as últimas 100 notícias de tecnologia, podendo salvá-las em
 
 As seguintes ferramentas foram utilizadas neste projeto:
 
-- [Nuxt](https://nuxt.com/)
+- [Nuxt](https://nuxt.com/) V3.12.4
 - [Vue](https://vuejs.org/)
-- [Node.js](https://nodejs.org/pt)
+- [Node.js](https://nodejs.org/pt) V21.6.0
 - [Tailwind CSS](https://tailwindcss.com/)
 
 ## :checkered_flag: Iniciando o Projeto ##

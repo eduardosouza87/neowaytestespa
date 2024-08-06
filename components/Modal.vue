@@ -31,7 +31,7 @@
   </UModal>
 </template>
 
-<script lang="ts" setup>
+<script setup>
 defineProps({
   article: {
     type: Object,

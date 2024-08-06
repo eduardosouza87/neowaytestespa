@@ -9,6 +9,9 @@
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare"
   },
+  "engines": {
+    "node": "21.6.0"
+  },
   "dependencies": {
     "@nuxt/image": "^1.7.0",
     "@nuxt/ui": "^2.18.3",
