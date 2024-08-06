@@ -58,6 +58,17 @@ npm install
 
 # pnpm
 pnpm install
+
+# Crie um arquivo .env na raiz do projeto, copiando o conteúdo de .env-sample:
+cp .env-sample .env
+
+# Obtendo chave API em NEWS API
+Obtenha uma chave de API em [News API](https://newsapi.org/).
+
+# No arquivo .env, substitua SUA_CHAVE_API_AQUI com a sua chave de API:
+API_BASE_URL=https://newsapi.org/v2/everything
+API_KEY=YOUR_API_KEY
+
 ```
 
 ## Desenvolvimento
