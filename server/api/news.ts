@@ -1,4 +1,4 @@
-export default defineEventHandler(async (event) => {
+export default defineEventHandler(async () => {
   const config = useRuntimeConfig()
   const apiKey = config.apiKey
   const apiUrl = `${config.public.apiBaseUrl}?q=technology`

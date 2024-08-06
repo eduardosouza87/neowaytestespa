@@ -1,75 +1,122 @@
-# Nuxt 3 Minimal Starter
+<div align="center" id="top"> 
+  <img src="./.github/app.gif" alt="Case técnico - Pessoa Desenvolvedor Frontend" />
 
-Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+  &#xa0;
 
-## Setup
+  <!-- <a href="https://nuxtapp.netlify.app">Demo</a> -->
+</div>
 
-Make sure to install the dependencies:
+<h1 align="center">Case técnico - Pessoa Desenvolvedor Frontend</h1>
+
+<!-- Status -->
+
+<h4 align="center"> 
+	Projeto desenvolvido para o teste de Eduardo de Souza
+</h4> 
+
+<hr>
+
+<p align="center">
+  <a href="#dart-about">Sobre</a> &#xa0; | &#xa0; 
+  <a href="#sparkles-features">Features</a> &#xa0; | &#xa0;
+  <a href="#rocket-technologies">Tecnologias</a> &#xa0; | &#xa0;
+  <a href="#checkered_flag-starting">Como Rodar</a> &#xa0; | &#xa0;
+  <a href="https://github.com/eduardosouza87" target="_blank">Autor</a>
+</p>
+
+<br>
+
+## :dart: Sobre ##
+
+Projeto que lista as últimas 100 notícias de tecnologia, podendo salvá-las em seus favoritos, utilizando a NEWS API.
+
+## :sparkles: Features ##
+
+:heavy_check_mark: Filtrar notícias através de um campo de busca;\
+:heavy_check_mark: Salvar notícias em seus favoritos
+
+## :rocket: Tecnologias ##
+
+As seguintes ferramentas foram utilizadas neste projeto:
+
+- [Nuxt](https://nuxt.com/)
+- [Vue](https://vuejs.org/)
+- [Node.js](https://nodejs.org/pt)
+- [Tailwind CSS](https://tailwindcss.com/)
+
+## :checkered_flag: Iniciando o Projeto ##
 
 ```bash
+# Clone este projeto
+$ git clone https://github.com/eduardosouza87/neowaytestespa
+
+# Acesse
+$ cd neowaytestespa
+
+# Instale as dependencias
+# pnpm
+$ pnpm i
+
+# Rode o projeto
+$ pnpm dev
+
+# O servidor vai iniciar em <http://localhost:3000>
+```
+
+## :checkered_flag: Iniciando o Projeto ##
+
+```bash
+# Clone este projeto
+git clone https://github.com/eduardosouza87/neowaytestespa
+
+# Acesse
+cd neowaytestespa
+
 # npm
 npm install
 
 # pnpm
 pnpm install
-
-# yarn
-yarn install
-
-# bun
-bun install
 ```
 
-## Development Server
+## Desenvolvimento
 
-Start the development server on `http://localhost:3000`:
+Inicie o servidor de desenvolvimento em `http://localhost:3000`:
 
 ```bash
 # npm
 npm run dev
 
 # pnpm
-pnpm run dev
-
-# yarn
-yarn dev
-
-# bun
-bun run dev
+pnpm dev
 ```
 
-## Production
+## Produção
 
-Build the application for production:
+Criar a aplicação para produção:
 
 ```bash
 # npm
 npm run build
 
 # pnpm
-pnpm run build
-
-# yarn
-yarn build
-
-# bun
-bun run build
+pnpm build
 ```
 
-Locally preview production build:
+Visualize localmente a versão de produção:
 
 ```bash
 # npm
 npm run preview
 
 # pnpm
-pnpm run preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
+pnpm preview
 ```
 
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+Confira a [documentação de implantação](https://nuxt.com/docs/getting-started/deployment) para obter mais informações.
+
+Feito com :heart: por <a href="https://github.com/eduardosouza87" target="_blank">Eduardo de Souza</a>
+
+&#xa0;
+
+<a href="#top">Voltar ao topo</a>
