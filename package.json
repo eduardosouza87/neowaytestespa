@@ -17,6 +17,7 @@
   },
   "devDependencies": {
     "@pinia/nuxt": "^0.5.2",
-    "pinia": "^2.2.0"
+    "pinia": "^2.2.0",
+    "postcss": "^8.4.40"
   }
 }

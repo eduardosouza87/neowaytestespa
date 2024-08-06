@@ -5,7 +5,7 @@ export default defineAppConfig({
     button: {
       font: 'font-bold',
       default: {
-        color: 'jacksons-purple',
+        color: 'blue',
         size: 'lg'
       }
     },

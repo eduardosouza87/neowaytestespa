@@ -1,20 +1,20 @@
 <template>
-  <div class="flex flex-col">
+  <div class="news-list">
     <div
       v-for="article in news"
       :key="article.url"
-      class="flex flex-row justify-between items-center lg:gap-x-10 border-t border-t-app-blue-100/10 first:border-t-0 py-8 first:pt-0"
+      class="news-list__item"
     >
       <div class="flex flex-col gap-y-2 lg:w-2/3">
-        <span class="uppercase text-sm text-app-blue-400">{{ article.source.name }}</span>
+        <span class="news-list__source">{{ article.source.name }}</span>
         <h1
-          class="text-xl text-app-orange-400 hover:text-app-orange-900 cursor-pointer transition-colors"
+          class="news-list__title"
           @click="openArticleModal(article)"
         > {{ article.title }}
         </h1>
-        <p class="text-sm">{{ article.description }}</p>
+        <p class="news-list__description">{{ article.description }}</p>
 
-        <div class="flex items-center">
+        <div>
           <UButton
             :icon="getIcon(article.url)"
             :color="isFavorite(article.url) ? 'red' : 'primary'"
@@ -30,7 +30,7 @@
       <NuxtImg
         v-if="article.urlToImage"
         :src="article.urlToImage"
-        class="w-80 h-64 object-cover rounded-md max-lg:hidden"
+        class="news-list__thumb"
       />
     </div>
   </div>
@@ -74,3 +74,29 @@ const getIcon = (articleUrl) => {
   return isFavorite(articleUrl) ? 'material-symbols:favorite' : 'material-symbols:favorite-outline'
 }
 </script>
+
+<style lang="postcss" scoped>
+.news-list {
+  @apply flex flex-col;
+}
+
+.news-list__item {
+  @apply flex flex-row justify-between items-center lg:gap-x-10 border-t border-t-app-blue-100/10 first:border-t-0 py-8 first:pt-0;
+}
+
+.news-list__source {
+  @apply uppercase text-sm text-app-blue-400;
+}
+
+.news-list__title {
+  @apply text-xl text-app-orange-400 hover:text-app-orange-900 cursor-pointer transition-colors;
+}
+
+.news-list__description {
+  @apply text-sm;
+}
+
+.news-list__thumb {
+  @apply w-80 h-64 object-cover rounded-md max-lg:hidden;
+}
+</style>

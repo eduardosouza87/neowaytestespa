@@ -30,6 +30,4 @@ const { startTracking, resetTimer, clearTimer } = useAutoBlur()
 watch(searchKeyword, (newValue) => {
   emit('update:modelValue', newValue)
 })
-
-
 </script>

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="relative">
     <div class="min-h-screen w-full py-10 px-4">
       <div class="container mx-auto">
         <div class="flex items-start gap-x-10">
@@ -33,6 +33,15 @@
       </div>
     </div>
 
+    <!-- <div class="fixed right-6 bottom-6">
+      <div class="shadow p-4 flex flex-col items-center bg-white rounded-full">
+        <UIcon
+          name="material-symbols:star"
+          class="w-8 h-8 text-amber-600"
+        />
+      </div>
+    </div> -->
+
     <UModals />
     <UNotifications />
   </div>
@@ -41,15 +50,15 @@
 <script setup>
 import { useFavoritesStore } from '~/stores/favorites';
 const favoritesStore = useFavoritesStore()
-const runtimeConfig = useRuntimeConfig()
+const runTimeConfig = useRuntimeConfig()
 
 const { data: news, pending: isLoading, error } = await useFetch(
   `?q=technology`,
   {
     server: false,
-    baseURL: runtimeConfig.public.apiBaseUrl,
+    baseURL: runTimeConfig.public.apiBaseUrl,
     headers: {
-      authorization: `Bearer ${runtimeConfig.public.apiKey}`
+      authorization: `Bearer ${runTimeConfig.public.apiKey}`
     }
   }
 )
