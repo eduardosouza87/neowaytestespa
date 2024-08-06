@@ -28,7 +28,7 @@
 
 ## :dart: Sobre ##
 
-Projeto que lista as últimas 100 notícias de tecnologia, podendo salvá-las em seus favoritos, utilizando a NEWS API.
+Projeto que lista as últimas 100 notícias relacionadas a bitcoin, podendo salvá-las em seus favoritos, utilizando a NEWS API.
 
 ## :sparkles: Features ##
 
