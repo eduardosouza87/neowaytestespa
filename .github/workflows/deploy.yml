@@ -8,8 +8,12 @@ on:
 env:
   NODE_VERSION: 20.16.0
 
+permissions:
+  contents: write
+
 jobs:
-  build:
+  build-and-deploy:
+  # build:
     runs-on: ubuntu-latest
     env:
       API_BASE_URL: ${{ secrets.API_BASE_URL }}
@@ -17,27 +21,34 @@ jobs:
       NODE_ENV: ${{ secrets.NODE_ENV }}
       NUXT_APP_BASE_URL: ${{ secrets.NUXT_APP_BASE_URL }}
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout 🛎️
+        uses: actions/checkout@v3
       - run: corepack enable
       - uses: actions/setup-node@v3
         with:
-          node-version: ${{env.NODE_VERSION}}
-      - run: npm ci --legacy-peer-deps
-      - run: npm run build --preset github_pages
+          node-version: ${{ env.NODE_VERSION }}
+      - name: Install & Generate 🔧
+        run: |
+          npm ci --legacy-peer-deps
+          npx nuxt build
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
           path: ./.output/public
-  deploy:
-    needs: build
-    permissions:
-      pages: write
-      id-token: write
-    environment:
-      name: github_pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v1
+      - name: Deploy 🚀
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: ./output/public
+  # deploy:
+  #   needs: build
+  #   permissions:
+  #     pages: write
+  #     id-token: write
+  #   environment:
+  #     name: github-pages
+  #     url: ${{ steps.deployment.outputs.page_url }}
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Deploy to GitHub Pages
+  #       id: deployment
+  #       uses: actions/deploy-pages@v1
