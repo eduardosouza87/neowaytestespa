@@ -5,12 +5,14 @@ export default defineNuxtConfig({
 
   nitro: {
     static: true,
-    
     prerender: {
-      routes: ['/', '/404.html', '/200.html'],
-      failOnError: false,
-      crawlLinks: false
-    },
+      crawlLinks: true,
+      routes: [
+        '/',
+        '/404'
+      ],
+      ignore: ['/']
+    }
   },
 
   app: {
