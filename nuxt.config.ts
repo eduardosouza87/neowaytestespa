@@ -3,13 +3,11 @@ export default defineNuxtConfig({
   compatibilityDate: '2024-04-03',
   devtools: { enabled: true },
 
-  // nitro: {
-  //   prerender: {
-  //    ignore: ['/', '/404.html', '/200.html']
-  //   },
-  // },
-
-  routeRules: { '/': {ssr: false} },
+  nitro: {
+    prerender: {
+      routes: ['/', '/404.html', '/200.html']
+    },
+  },
 
   app: {
     head: {
