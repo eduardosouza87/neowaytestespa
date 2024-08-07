@@ -12,6 +12,8 @@
 
 <h4 align="center"> 
 	Projeto desenvolvido para o teste de Eduardo de Souza
+  
+  Para acessar o site no Github Pages, acesse: [dudufazpratu.com](https://eduardosouza87.github.io/neowaytestespa/)
 </h4> 
 
 <hr>
