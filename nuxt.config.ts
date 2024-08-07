@@ -14,8 +14,8 @@ export default defineNuxtConfig({
         }
       ]
     },    
-    baseURL: '/',
-    buildAssetsDir: '__app',
+    baseURL: process.env.NODE_ENV === 'production' ? '/neowaytestespa/' : '/',
+    buildAssetsDir: '_nuxt',
   },
 
   runtimeConfig: {
