@@ -6,7 +6,7 @@ on:
 permissions:
   contents: write
 jobs:
-  build-and-deploy:
+  build_and_deploy:
     concurrency: ci-${{ github.ref }}
     runs-on: ubuntu-latest
     strategy:
@@ -23,14 +23,14 @@ jobs:
 
     - name: Install & Generate 🔧
       env:
-        API_BASE_URL: ${{ secrets.API_BASE_URL }}
-        API_KEY: ${{ secrets.API_KEY }}
-        NODE_ENV: ${{ secrets.NODE_ENV }}
-        NUXT_APP_BASE_URL: ${{ secrets.NUXT_APP_BASE_URL }}
+        API_BASE_URL: ${{ vars.API_BASE_URL }}
+        API_KEY: ${{ vars.API_KEY }}
+        NODE_ENV: ${{ vars.NODE_ENV }}
+        NUXT_APP_BASE_URL: ${{ vars.NUXT_APP_BASE_URL }}
       run: |
         npm ci
         npm run generate
-
+      
     - name: Deploy 🚀
       uses: JamesIves/github-pages-deploy-action@v4
       with:
