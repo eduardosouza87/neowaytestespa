@@ -56,9 +56,6 @@ cd neowaytestespa
 # npm
 npm install
 
-# pnpm
-pnpm install
-
 # Crie um arquivo .env na raiz do projeto, copiando o conteúdo de .env-sample:
 cp .env-sample .env
 
@@ -79,8 +76,6 @@ Inicie o servidor de desenvolvimento em `http://localhost:3000`:
 # npm
 npm run dev
 
-# pnpm
-pnpm dev
 ```
 
 ## Produção
@@ -91,8 +86,6 @@ Criar a aplicação para produção:
 # npm
 npm run build
 
-# pnpm
-pnpm build
 ```
 
 Visualize localmente a versão de produção:
