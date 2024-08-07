@@ -9,9 +9,9 @@ export default defineNuxtConfig({
       crawlLinks: true,
       routes: [
         '/',
-        '/404'
-      ],
-      ignore: ['/']
+        '/404',
+        '/200'
+      ]
     }
   },
 
