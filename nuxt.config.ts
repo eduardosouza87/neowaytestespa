@@ -17,6 +17,11 @@ export default defineNuxtConfig({
     baseURL: process.env.NODE_ENV === 'production' ? '/neowaytestespa' : '/'
   },
 
+  target: 'static',
+  generate: {
+    fallback: '404.html'
+  },
+
   runtimeConfig: {
     apiKey: process.env.API_KEY,
     
