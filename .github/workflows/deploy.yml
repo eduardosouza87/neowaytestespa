@@ -29,7 +29,7 @@ jobs:
         NUXT_APP_BASE_URL: ${{ secrets.NUXT_APP_BASE_URL }}
       run: |
         npm ci
-        npm run build
+        npm run generate
 
     - name: Deploy 🚀
       uses: JamesIves/github-pages-deploy-action@v4
