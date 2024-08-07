@@ -4,8 +4,12 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
 
   nitro: {
+    static: true,
+    
     prerender: {
-      routes: ['/', '/404.html', '/200.html']
+      routes: ['/', '/404.html', '/200.html'],
+      failOnError: false,
+      crawlLinks: false
     },
   },
 
