@@ -20,6 +20,10 @@
               <SkeletonLoader :count="5" />
             </div>
 
+            <div v-if="searchKeyword">
+              <span>{{ filteredNewsCount }} notícias encontradas para a sua busca <b>{{ searchKeyword }}</b></span>
+            </div>
+
             <NewsList
               v-if="filteredNews"
               :news="filteredNews"
@@ -101,6 +105,9 @@ const filteredNews = computed(() => {
   )
 })
 
+// Computed para contar o número de itens filtrados
+const filteredNewsCount = computed(() => filteredNews.value.length)
+
 const isOpenSidebar = ref(false)
 const handleSidebar = () => {
   isOpenSidebar.value = !isOpenSidebar.value
@@ -137,7 +144,7 @@ const handleSidebar = () => {
 }
 
 .favorites-news {
-  @apply bg-white lg:w-1/3 rounded-md p-4 lg:p-8 shadow fixed lg:sticky max-lg:right-0 top-6 max-lg:z-10 transition-transform;
+  @apply bg-white lg:w-1/3 rounded-md p-4 lg:p-8 shadow fixed lg:sticky max-lg:right-0 top-0 lg:top-6 max-lg:z-10 transition-transform;
 }
 
 .favorites-button {
@@ -145,10 +152,10 @@ const handleSidebar = () => {
 }
 
 .favorites-button__icon-container {
-  @apply w-6 h-6 text-app-blue-400;
+  @apply shadow p-3 flex flex-col items-center bg-app-blue-100 rounded-full cursor-pointer;
 }
 
 .favorites-button__icon {
-  @apply shadow p-3 flex flex-col items-center bg-app-blue-100/50 rounded-full cursor-pointer;
+  @apply w-6 h-6 text-app-blue-400;
 }
 </style>
