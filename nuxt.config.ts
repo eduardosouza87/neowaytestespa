@@ -5,7 +5,7 @@ export default defineNuxtConfig({
 
   nitro: {
     prerender: {
-      ignore: ['200.html', '400.html', '404.html']
+      routes: ['/']
     },
   },
 
