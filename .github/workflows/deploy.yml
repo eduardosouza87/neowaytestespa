@@ -31,14 +31,10 @@ jobs:
         run: |
           npm ci --legacy-peer-deps
           npx nuxt build
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v1
-        with:
-          path: ./.output/public
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          folder: ./output/public
+          folder: ./output
   # deploy:
   #   needs: build
   #   permissions:
