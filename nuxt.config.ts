@@ -18,9 +18,6 @@ export default defineNuxtConfig({
   },
 
   target: 'static',
-  generate: {
-    fallback: '404.html'
-  },
 
   runtimeConfig: {
     apiKey: process.env.API_KEY,
