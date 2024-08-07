@@ -1,7 +1,20 @@
 <template>
-  <div class="news-list">
+  <div
+    v-if="isLoading"
+    class="flex flex-col gap-y-8"
+  >
+    <SkeletonLoader :count="5" />
+  </div>
+  <div v-else-if="error">{{ error }}</div>
+  <div
+    v-else
+    class="news-list"
+  >
+    <div v-if="searchKeyword">
+      <span>{{ filteredNewsCount }} notícias encontradas para a sua busca <b>{{ searchKeyword }}</b></span>
+    </div>
     <div
-      v-for="article in news"
+      v-for="article in filteredNews"
       :key="article.url"
       class="news-list__item"
     >
@@ -10,10 +23,8 @@
         <h1
           class="news-list__title"
           @click="openArticleModal(article)"
-        > {{ article.title }}
-        </h1>
+        > {{ article.title }} </h1>
         <p class="news-list__description">{{ article.description }}</p>
-
         <div>
           <UButton
             :icon="getIcon(article.url)"
@@ -26,7 +37,6 @@
           </UButton>
         </div>
       </div>
-
       <NuxtImg
         v-if="article.urlToImage"
         :src="article.urlToImage"
@@ -37,50 +47,56 @@
 </template>
 
 <script setup>
-import { useFavoritesStore } from '~/stores/favorites';
+import { useFavoritesStore } from '~/stores/favorites'
+import { useArticleModal } from '~/composables/useArticleModal'
 
 const props = defineProps({
-  news: {
-    type: Array,
+  searchKeyword: {
+    type: String,
     required: true
   }
 })
 
+const news = ref(null)
+const isLoading = ref(true)
+const error = ref(null)
+const newsList = ref([])
+
+const { fetchNews } = useGetNews()
+
+const loadNews = async () => {
+  const result = await fetchNews()
+  if (result.error) {
+    error.value = result.error
+  } else {
+    news.value = result
+    newsList.value = result.articles
+  }
+  isLoading.value = false
+}
+
+onMounted(async () => {
+  await loadNews()
+  if (news.value) {
+    newsList.value = news.value.articles
+  }
+})
+
+const filteredNews = computed(() => {
+  if (!props.searchKeyword) {
+    return newsList.value || []
+  }
+  return (newsList.value || []).filter(article =>
+    article.title.toLowerCase().includes(props.searchKeyword.toLowerCase())
+  )
+})
+
+const filteredNewsCount = computed(() => filteredNews.value.length)
+
+// Funções para favoritos e modal
 const favoritesStore = useFavoritesStore()
 const { openArticleModal } = useArticleModal()
 const toast = useToast()
-
-
-// const news = ref(null)
-// const isLoading = ref(true)
-// const error = ref(null)
-// const searchKeyword = ref('')
-
-// const { fetchNews } = useGetNews()
-
-// const loadNews = async () => {
-//   const result = await fetchNews()
-//   if (result.error) {
-//     error.value = result.error
-//   } else {
-//     news.value = result.articles
-//   }
-//   isLoading.value = false
-// }
-
-// onMounted(async () => {
-//   await loadNews()
-// })
-
-// // Computed para filtrar as notícias com base na palavra-chave de busca
-// const filteredNews = computed(() => {
-//   if (!searchKeyword.value) {
-//     return news.value || []
-//   }
-//   return (news.value || []).filter(article =>
-//     article.title.toLowerCase().includes(searchKeyword.value.toLowerCase())
-//   )
-// })
 
 const toggleFavorite = (article) => {
   if (favoritesStore.isFavorite(article.url)) {
@@ -105,7 +121,6 @@ const isFavorite = (articleUrl) => {
 const getIcon = (articleUrl) => {
   return isFavorite(articleUrl) ? 'material-symbols:favorite' : 'material-symbols:favorite-outline'
 }
-
 </script>
 
 <style lang="postcss" scoped>

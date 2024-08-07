@@ -9,25 +9,7 @@
               <SearchInput v-model="searchKeyword" />
             </div>
 
-            <div v-if="error">
-              <span>{{ error.message }}</span>
-            </div>
-
-            <div
-              v-else-if="isLoading"
-              class="flex flex-col gap-y-8"
-            >
-              <SkeletonLoader :count="5" />
-            </div>
-
-            <div v-if="searchKeyword">
-              <span>{{ filteredNewsCount }} notícias encontradas para a sua busca <b>{{ searchKeyword }}</b></span>
-            </div>
-
-            <NewsList
-              v-if="filteredNews"
-              :news="filteredNews"
-            />
+            <NewsList :searchKeyword="searchKeyword" />
           </section>
 
           <aside
@@ -66,39 +48,8 @@ useSeoMeta({
 })
 
 const favoritesStore = useFavoritesStore()
-const runTimeConfig = useRuntimeConfig()
-
-const { data: news, pending: isLoading, error } = await useFetch(
-  `?q=bitcoin`,
-  {
-    server: false,
-    baseURL: runTimeConfig.public.apiBaseUrl,
-    headers: {
-      authorization: `Bearer ${runTimeConfig.public.apiKey}`
-    }
-  }
-)
 
 const searchKeyword = ref('')
-const newsList = ref([])
-
-watchEffect(() => {
-  if (news.value) {
-    newsList.value = news.value.articles
-  }
-})
-
-const filteredNews = computed(() => {
-  if (!searchKeyword.value) {
-    return newsList.value || []
-  }
-
-  return newsList.value.filter(article =>
-    article.title.toLowerCase().includes(searchKeyword.value.toLowerCase())
-  )
-})
-
-const filteredNewsCount = computed(() => filteredNews.value.length)
 
 const isOpenSidebar = ref(false)
 const handleSidebar = () => {
