@@ -1,7 +1,8 @@
 export const useGetNews = () => {
   const config = useRuntimeConfig()
   const apiKey = config.public.apiKey
-  const apiUrl = `${config.public.apiBaseUrl}?q=bitcoin`
+  // const apiUrl = `${config.public.apiBaseUrl}?q=bitcoin`
+  const apiUrl = 'https://newsapi.org/v2/everything?q=bitcoin'
 
   const fetchNews = async () => {
     try {
