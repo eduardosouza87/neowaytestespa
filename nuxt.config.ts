@@ -13,8 +13,13 @@ export default defineNuxtConfig({
           href: 'https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap'
         }
       ]
-    },    
-    // baseURL: process.env.NODE_ENV === 'production' ? '/neowaytestespa' : '/',
+    },
+  },
+
+  router: {
+    options: {
+      hashMode: true
+    }
   },
 
   runtimeConfig: {
