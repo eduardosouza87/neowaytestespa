@@ -5,7 +5,7 @@ export default defineNuxtConfig({
 
   nitro: {
     prerender: {
-      failOnError: false,
+      ignore: ['200.html', '400.html', '404.html']
     },
   },
 
