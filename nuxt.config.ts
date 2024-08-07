@@ -15,13 +15,7 @@ export default defineNuxtConfig({
       ]
     },
   },
-
-  router: {
-    options: {
-      hashMode: true
-    }
-  },
-
+  
   runtimeConfig: {
     apiKey: process.env.API_KEY,
     
