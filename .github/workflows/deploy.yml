@@ -23,7 +23,7 @@ jobs:
         with:
           node-version: ${{env.NODE_VERSION}}
       - run: npm ci --legacy-peer-deps
-      - run: npm build --preset github_pages
+      - run: npm run build --preset github_pages
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
