@@ -1,9 +1,9 @@
 import * as newsMock from '~/mocks/news.json'
 
-export const useGetNews = async () => {
+export const useGetNews = async (searchText: string = 'bitcoin') => {
   const config = useRuntimeConfig()
   const apiKey = config.public.apiKey
-  const apiUrl = `${config.public.apiBaseUrl}?q=bitcoin`
+  const apiUrl = `${config.public.apiBaseUrl}?q=${searchText}`
 
   // Fui obrigado a fazer isso, pois a NEWSAPI não funciona em ambiente que não seja localhost
   if (config.public.isProduction === 'production') {
@@ -15,7 +15,7 @@ export const useGetNews = async () => {
   try {
     const data = await $fetch(`${apiUrl}&apiKey=${apiKey}`)
     return data
-  } catch (error) {
-    return { error: error.message }
+  } catch (error: unknown) {
+    return { error: error?.message }
   }
 }

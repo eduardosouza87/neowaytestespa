@@ -7,9 +7,6 @@
     :trailing="false"
     placeholder="Buscar notícias..."
     v-model="searchKeyword"
-    @focus="startTracking"
-    @input="resetTimer"
-    @blur="clearTimer"
   />
 </template>
 
@@ -24,8 +21,6 @@ defineProps({
 const emit = defineEmits(['update:modelValue'])
 
 const searchKeyword = ref('')
-
-const { startTracking, resetTimer, clearTimer } = useAutoBlur()
 
 watch(searchKeyword, (newValue) => {
   emit('update:modelValue', newValue)

@@ -10,11 +10,13 @@
     v-else
     class="news-list"
   >
-    <div v-if="searchKeyword">
+
+    <div v-if="!isInterected && searchKeyword">
       <span>{{ filteredNewsCount }} notícias encontradas para a sua busca <b>{{ searchKeyword }}</b></span>
     </div>
+
     <div
-      v-for="article in filteredNews"
+      v-for="article in newsList"
       :key="article.url"
       class="news-list__item"
     >
@@ -41,6 +43,7 @@
         v-if="article.urlToImage"
         :src="article.urlToImage"
         class="news-list__thumb"
+        @click="openArticleModal(article)"
       />
     </div>
   </div>
@@ -61,35 +64,38 @@ const news = ref(null)
 const isLoading = ref(true)
 const error = ref(null)
 const newsList = ref([])
+const isInterected = ref(false)
 
-const loadNews = async () => {
-  const result = await useGetNews()
+let debounceTimeout = null
+
+const loadNews = async (searchText) => {
+  isLoading.value = true
+  const result = await useGetNews(searchText)
   if (result.error) {
     error.value = result.error
   } else {
     news.value = result
     newsList.value = result.articles
   }
+  isInterected.value = false
   isLoading.value = false
 }
 
+watch(() => props.searchKeyword, (newKeyword) => {
+  isInterected.value = true
+  clearTimeout(debounceTimeout)
+  debounceTimeout = setTimeout(() => {
+    loadNews(newKeyword === '' ? 'bitcoin' : newKeyword)
+  }, 1000)
+})
+
 onMounted(async () => {
   await loadNews()
-  if (news.value) {
-    newsList.value = news.value.articles
-  }
 })
 
-const filteredNews = computed(() => {
-  if (!props.searchKeyword) {
-    return newsList.value || []
-  }
-  return (newsList.value || []).filter(article =>
-    article.title.toLowerCase().includes(props.searchKeyword.toLowerCase())
-  )
+const filteredNewsCount = computed(() => {
+  return newsList.value.length
 })
-
-const filteredNewsCount = computed(() => filteredNews.value.length)
 
 // Funções para favoritos e modal
 const favoritesStore = useFavoritesStore()
@@ -147,6 +153,6 @@ const getIcon = (articleUrl) => {
 }
 
 .news-list__thumb {
-  @apply w-full h-32 max-lg:order-1 lg:w-80 lg:h-64 object-cover rounded-md;
+  @apply w-full h-32 max-lg:order-1 lg:w-80 lg:h-64 object-cover rounded-md cursor-pointer;
 }
 </style>

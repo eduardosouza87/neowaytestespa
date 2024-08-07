@@ -78,24 +78,12 @@ npm run dev
 
 ```
 
-## Produção
-
-Criar a aplicação para produção:
-
-```bash
-# npm
-npm run build
-
-```
-
 Visualize localmente a versão de produção:
 
 ```bash
 # npm
 npm run preview
 
-# pnpm
-pnpm preview
 ```
 
 Confira a [documentação de implantação](https://nuxt.com/docs/getting-started/deployment) para obter mais informações.
