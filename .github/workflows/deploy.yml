@@ -23,10 +23,10 @@ jobs:
 
     - name: Install & Generate 🔧
       env:
-        API_BASE_URL: ${{ vars.API_BASE_URL }}
-        API_KEY: ${{ vars.API_KEY }}
-        NODE_ENV: ${{ vars.NODE_ENV }}
-        NUXT_APP_BASE_URL: ${{ vars.NUXT_APP_BASE_URL }}
+        API_BASE_URL: ${{ secrets.API_BASE_URL }}
+        API_KEY: ${{ secrets.API_KEY }}
+        NODE_ENV: ${{ secrets.NODE_ENV }}
+        NUXT_APP_BASE_URL: ${{ secrets.NUXT_APP_BASE_URL }}
       run: |
         npm ci
         npm run build
