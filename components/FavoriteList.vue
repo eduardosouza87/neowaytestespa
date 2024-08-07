@@ -35,12 +35,19 @@
 const favoritesStore = useFavoritesStore()
 const { openArticleModal } = useArticleModal()
 
+// const fetchFavorites = async () => {
+//   const data = await $fetch('/api/favorites')
+//   favoritesStore.favorites = data || []
+// }
+
 const fetchFavorites = async () => {
-  const data = await $fetch('/api/favorites')
-  favoritesStore.favorites = data || []
+  const favorites = await useGetFavorites()
+  favoritesStore.favorites = favorites || []
 }
 
-onMounted(fetchFavorites)
+onMounted(async () => {
+  await fetchFavorites()
+})
 
 const openFavoriteArticle = (article) => {
   openArticleModal(article)

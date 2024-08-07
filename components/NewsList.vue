@@ -1,5 +1,19 @@
 <template>
-  <div class="news-list">
+  <div v-if="error">
+    <span>{{ error.message }}</span>
+  </div>
+
+  <div
+    v-else-if="isLoading"
+    class="flex flex-col gap-y-8"
+  >
+    <SkeletonLoader :count="5" />
+  </div>
+
+  <div
+    v-else
+    class="news-list"
+  >
     <div
       v-for="article in news"
       :key="article.url"
@@ -38,16 +52,47 @@
 
 <script setup>
 import { useFavoritesStore } from '~/stores/favorites';
+import { useGetNews } from '~/composables/useGetNews'
 
-const props = defineProps({
-  news: {
-    type: Array,
-    required: true
+// const props = defineProps({
+//   searchKeyword: {
+//     type: string,
+//     required: true
+//   }
+// })
+
+const news = ref(null)
+const isLoading = ref(true)
+const error = ref(null)
+const searchKeyword = ref('')
+
+const { fetchNews } = useGetNews()
+
+const loadNews = async () => {
+  const result = await fetchNews()
+  if (result.error) {
+    error.value = result.error
+  } else {
+    news.value = result.articles
   }
+  isLoading.value = false
+}
+
+onMounted(async () => {
+  await loadNews()
+})
+
+// Computed para filtrar as notícias com base na palavra-chave de busca
+const filteredNews = computed(() => {
+  if (!searchKeyword.value) {
+    return news.value || []
+  }
+  return (news.value || []).filter(article =>
+    article.title.toLowerCase().includes(searchKeyword.value.toLowerCase())
+  )
 })
 
 const favoritesStore = useFavoritesStore()
-const { openArticleModal } = useArticleModal()
 const toast = useToast()
 
 const toggleFavorite = (article) => {
@@ -72,6 +117,10 @@ const isFavorite = (articleUrl) => {
 
 const getIcon = (articleUrl) => {
   return isFavorite(articleUrl) ? 'material-symbols:favorite' : 'material-symbols:favorite-outline'
+}
+
+const openArticleModal = (article) => {
+  // Lógica para abrir o modal do artigo
 }
 </script>
 

@@ -9,25 +9,11 @@
               <SearchInput v-model="searchKeyword" />
             </div>
 
-            <div v-if="error">
-              <span>{{ error.message }}</span>
-            </div>
-
-            <div
-              v-else-if="isLoading"
-              class="flex flex-col gap-y-8"
-            >
-              <SkeletonLoader :count="5" />
-            </div>
-
             <div v-if="searchKeyword">
               <span>{{ filteredNewsCount }} notícias encontradas para a sua busca <b>{{ searchKeyword }}</b></span>
             </div>
 
-            <NewsList
-              v-if="filteredNews"
-              :news="filteredNews"
-            />
+            <NewsList :searchKeyword="searchKeyword" />
           </section>
 
           <aside
@@ -71,17 +57,31 @@ const error = ref(null)
 
 const favoritesStore = useFavoritesStore()
 
-onMounted(async () => {
-  try {
-    isLoading.value = true
-    const data = await $fetch('/api/news')
-    news.value = data
-  } catch (err) {
-    error.value = err
-  } finally {
-    isLoading.value = false
+const fetchNews = async () => {
+  const result = await useGetNews()
+  if (result.error) {
+    error.value = result.error
+  } else {
+    news.value = result.articles
   }
+  isLoading.value = false
+}
+
+onMounted(async () => {
+  await fetchNews()
 })
+
+// onMounted(async () => {
+//   try {
+//     isLoading.value = true
+//     const data = await $fetch('/api/news')
+//     news.value = data
+//   } catch (err) {
+//     error.value = err
+//   } finally {
+//     isLoading.value = false
+//   }
+// })
 
 const searchKeyword = ref('')
 const newsList = ref([])
