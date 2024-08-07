@@ -47,8 +47,8 @@
 </template>
 
 <script setup>
-import { useFavoritesStore } from '~/stores/favorites'
-import { useArticleModal } from '~/composables/useArticleModal'
+import { useArticleModal } from '~/composables/useArticleModal';
+import { useFavoritesStore } from '~/stores/favorites';
 
 const props = defineProps({
   searchKeyword: {
@@ -62,10 +62,8 @@ const isLoading = ref(true)
 const error = ref(null)
 const newsList = ref([])
 
-const { fetchNews } = useGetNews()
-
 const loadNews = async () => {
-  const result = await fetchNews()
+  const result = await useGetNews()
   if (result.error) {
     error.value = result.error
   } else {
